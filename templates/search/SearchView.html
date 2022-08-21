@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+wyniki
+{% endblock %}
+
+{% block header %}
+{% with search_results.count as total_results %}
+Znaleziono {{ total_results }} dani{{ total_results|pluralize:"e,a" }}
+{% endwith %}
+{% endblock header %}
+
+{% block body %}
+
+{% if query %}
+
+<div class="row">
+    {% for result in search_results %}
+        <div class="col-sm-12 col-md-3">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">{{result.title}}</h5>
+            <p class="card-text">{{result.description}}</p>
+            <div class="d-flex">
+                <a href="{{dish.get_absolute_url}}" class="btn btn-primary">Zobacz przepis</a>
+                {% comment %} <a href="{% url 'dish_update' dish.slug %}" class="btn btn-primary mx-1">Edytuj</a>
+                <a href="{% url 'dish_delete' dish.slug %}" class="btn btn-primary">Usuń</a> {% endcomment %}
+            </div>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock body %}
+
+
+
+
+
+
+
+

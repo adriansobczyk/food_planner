@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+listy zakupów
+{% endblock %}
+
+{% block header %}
+{{ request.user.username }} - listy zakupów
+{% endblock header %}
+
+{% block body %}
+
+
+<div x-data="getLists()" class="mt-5">
+    <form id="list-form">
+        {% csrf_token %}
+    </form>
+    <div class="input-group mb-3">
+        <input x-model="newList" type="text" class="form-control" placeholder="Nazwa listy">
+        <button @click="addList(newList)" class="btn btn-success" type="submit">Dodaj liste</button>
+    </div>
+    <ul class="list-group mt-5">
+        <template x-for="list in lists">
+            <li class="d-flex justify-content-between list-group-item">
+                <a
+                    x-text="list.title"
+                    x-bind:href="'/lista/'+list.id"
+                    class="link-dark stretched-link text-decoration-none lead p-2">
+                </a>
+                <button @click="removeList(list.id)"
+                        class="btn btn-danger" style="position: relative; z-index: 2;">Usuń</button>
+            </li>
+        </template>
+    </ul>
+</div>
+
+<script>
+    const getLists = () => {
+        return {
+            newList: '',
+            lists: [
+                {% for list in lists %}
+                { 'title': '{{ list.title }}', 'id': '{{ list.id }}' },
+                {% endfor %}
+            ]
+        }
+    };
+</script>
+<script src="{% static 'main_listview.js' %}"></script> 
+
+{% endblock body %}
+
+
+
+
+
+
+
+

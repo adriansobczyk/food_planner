@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}
+Dodaj przepis
+{% endblock %}
+
+
+{% block body %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary mt-3">Aktualizuj przepis</button>
+    </div>
+</form>
+
+{% endblock body %}

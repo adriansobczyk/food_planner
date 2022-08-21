@@ -1,0 +1,33 @@
+<header>
+    {% url 'homepage' as homepage %}
+    {% url 'shopping_lists' as shopping_lists %}
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                    <a class="nav-link {% if request.path == homepage %}active{% endif %}" aria-current="page" href="{% url 'homepage' %}">Strona główna</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link {% if request.path == shopping_lists %}active{% endif %} {% if 'lista' in request.path %}active{% endif %}" href="{% url 'shopping_lists' %}">Listy zakupów</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == dish_list %}active{% endif %} {% if 'przepis' in request.path %}active{% endif %}" href="{% url 'dish_list' %}">Przepisy</a>
+                    </li>
+                </ul>
+            <form action="{% url 'search_results' %}" method="GET" class="d-flex">
+                <input name="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+            </div>
+        </div>
+    </nav>
+</header>

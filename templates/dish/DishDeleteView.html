@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}
+Usuń przepis
+{% endblock %}
+
+
+{% block body %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Czy napewno chcesz usunąć przepis <strong>{{dish.title}}</strong>?</p>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary mt-3">Usuń przepis</button>
+    </div>
+</form>
+
+{% endblock body %}

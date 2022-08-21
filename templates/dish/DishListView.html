@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+przepisy
+{% endblock %}
+
+{% block header %}
+<div class="d-inline">
+Nasze przepisy
+<a href="{% url 'dish_create' %}" class="text-decoration-none">
+    <i class="bi bi-plus-circle"></i>
+</a>
+</div>
+{% endblock header %}
+
+{% block body %}
+
+<div class="row">
+    {% for dish in dish_list %}
+        <div class="col-sm-12 col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{dish.title}}</h5>
+                    <p class="card-text">{{dish.description}}</p>
+                    <div class="d-flex">
+                        <a href="{{dish.get_absolute_url}}" class="btn btn-primary">Zobacz przepis</a>
+                        <a href="{% url 'dish_update' dish.slug %}" class="btn btn-primary mx-1">Edytuj</a>
+                        <a href="{% url 'dish_delete' dish.slug %}" class="btn btn-primary">Usuń</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}
+
+
+
+
+
+
+
+

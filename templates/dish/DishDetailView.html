@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ dish.title }}
+{% endblock %}
+
+{% block header %}
+{{ dish.title }}
+{% endblock header %}
+
+{% block body %}
+<div class="d-inline">
+    <a href="{% url 'dish_update' dish.slug %}" class="btn btn-primary mx-1">Edytuj</a>
+    <a href="{% url 'dish_delete' dish.slug %}" class="btn btn-primary">Usuń</a>
+</div>
+<h4 class="py-3">Opis:</h4>
+<div>{{dish.description}}</div>
+
+<h4 class="py-3">Składniki:</h4>
+{% endblock body %}

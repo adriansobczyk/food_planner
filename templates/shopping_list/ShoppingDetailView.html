@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ list.title }}
+{% endblock %}
+
+{% block header %}
+{{ list.title }}
+{% endblock header %}
+
+{% block body %}
+
+<div x-data="getTasks()" class="mt-5">
+    <form id="list-form">
+        {% csrf_token %}
+    </form>
+    <div class="input-group mb-3">
+        <input x-model="newTask" type="text" class="form-control" placeholder="Nazwa zadania">
+        <button @click="addTask(newTask, {{ list.id }} )" class="btn btn-success" type="submit">Dodaj zadanie</button>
+    </div>
+
+    <ul class="list-group mt-5">
+        <template x-for="task in tasks">
+            <li class="d-flex list-group-item align-content-center flex-wrap">
+                <div class="me-auto p-2 link-dark lead" x-text="task.title"></div>
+                <button class="p-2 btn btn-success" @click="updateTask(task.id, false)" x-show="task.status == 'True'">Zrobione</button>
+                <button class="p-2 btn btn-secondary" @click="updateTask(task.id, true)" x-show="task.status == 'False'">Do zrobienia</button>
+                <button class="btn btn-danger ms-3" @click="removeTask(task.id)">Usuń</button>
+            </li>
+        </template>
+    </ul>
+</div>
+
+<script>
+
+const csrftoken = document.querySelector('#list-form > input').value;
+
+const getTasks = () => {
+    return {
+        newTask: '',
+        tasks: [
+            {% for task in list.tasks.all %}
+            { 'title': '{{ task.title }}', 'id': '{{ task.id }}', 'status': '{{ task.completed }}' },
+            {% endfor %}
+        ]
+    }
+};
+
+</script>
+<script src="{% static 'main_detailview.js' %}"></script> 
+
+{% endblock body %}

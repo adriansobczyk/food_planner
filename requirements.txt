@@ -1,0 +1,6 @@
+django==4.0
+djangorestframework==3.13.1
+django-jazzmin==2.5.0
+django-taggit==3.0.0
+django-taggit-autosuggest==0.3.8
+django-taggit-labels==0.7.0
